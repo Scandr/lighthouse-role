@@ -1,0 +1,27 @@
+---
+# tasks file for lighthouse-role
+- name: Clone Lighthose git repository
+  ansible.builtin.git:
+    repo: "https://github.com/VKCOM/lighthouse.git"
+    dest: "{{ lighthouse_dir }}"
+    clone: true
+    update: true
+
+- name: Install Nginx
+  ansible.builtin.apt:
+    name: nginx
+    state: present
+
+- name: Recursively remove /var/www/html
+  ansible.builtin.file:
+    path: /var/www/html
+    state: absent
+
+- name: Create symlink for NGINX to open Lighthouse
+  ansible.builtin.file:
+    src: "{{ lighthouse_dir }}"
+    dest: /var/www/html
+    owner: root
+    group: root
+    mode: '0755'
+    state: link
