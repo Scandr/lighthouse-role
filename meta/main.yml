@@ -1,3 +1,10 @@
+---
+dependencies:
+  - src: git@github.com:AlexeySetevoi/ansible-clickhouse.git
+    scm: git
+    version: "1.11.0"
+    name: clickhouse
+
 galaxy_info:
   author: your name
   description: your role description
